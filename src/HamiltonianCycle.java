@@ -39,11 +39,42 @@ public class HamiltonianCycle {
 
     public void displayCycles(int[][] distances){
         Map map = new Map(distances);
+        ArrayList<Integer> distancesList = new ArrayList<>();
+
+        for (String cycle:
+                cycles) {
+            distancesList.add(map.getTotalEdgeLength(cycle));
+        }
+
+        sort(distancesList);
 
         System.out.println(ANSI_BLACK_BACKGROUND + "Number of Hamiltonian Cycles = " + cycles.size() + ANSI_RESET);
         for (String cycle:
              cycles) {
             System.out.println(ANSI_BLUE + cycle + ANSI_RESET + " = " + map.getTotalEdgeLength(cycle) + "km");
         }
+    }
+
+    private void sort(ArrayList<Integer> distanceList){
+        int minimumI;
+        for (int unsortedI = 0; unsortedI < distanceList.size() - 1; unsortedI++) {
+            minimumI = unsortedI;
+
+            for (int searchI = unsortedI + 1; searchI < distanceList.size(); searchI++) {
+                if (distanceList.get(searchI) < distanceList.get(minimumI)){
+                    minimumI = searchI;
+                }
+            }
+
+            int tempDist = distanceList.get(unsortedI);
+            String tempCycle = cycles.get(unsortedI);
+
+            distanceList.set(unsortedI, distanceList.get(minimumI));
+            cycles.set(unsortedI, cycles.get(minimumI));
+
+            distanceList.set(minimumI, tempDist);
+            cycles.set(minimumI, tempCycle);
+        }
+
     }
 }

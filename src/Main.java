@@ -11,7 +11,7 @@ public class Main {
         distances[5] = new int[]{ 615, 623, 361,  530,  529,   0};
 
 
-        HamiltonianCycle hamiltonianCycle = new HamiltonianCycle(6, 0);
+        HamiltonianCycle hamiltonianCycle = new HamiltonianCycle(distances.length, 0);
         hamiltonianCycle.displayCycles(distances);
     }
 }
